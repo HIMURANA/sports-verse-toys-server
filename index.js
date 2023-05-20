@@ -27,7 +27,7 @@ async function run() {
     await client.connect();
 
     const categoryCollection = client.db('zooZest').collection('shopCategory')
-
+    const toyCollection = client.db('zooZest').collection('toys')
 
     app.get('/category/teddy', async(req, res)=>{
         const query = {category:"teddy"}
@@ -46,6 +46,12 @@ async function run() {
         const cursor = categoryCollection.find(query)
         const result = await cursor.toArray()
         res.send(result)
+    })
+
+    app.post('/toys', async(req, res)=>{
+      const newToy = req.body
+      const result = await toyCollection.insertOne(newToy)
+      res.send(result)
     })
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
