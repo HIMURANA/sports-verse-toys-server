@@ -47,7 +47,11 @@ async function run() {
         res.send(result)
     })
     app.get('/toys', async(req, res)=>{
-      const cursor = toyCollection.find().limit(20)
+      let query ={}
+      if(req.query?.sellerEmail){
+        query={sellerEmail: req.query.sellerEmail}
+      }
+      const cursor = toyCollection.find(query).limit(20)
       const result = await cursor.toArray()
       res.send(result)
     })
@@ -58,6 +62,9 @@ async function run() {
       const result = await toyCollection.findOne(query)
       res.send(result)
     })
+
+
+
     app.post('/toys', async(req, res)=>{
       const newToy = req.body
       const result = await toyCollection.insertOne(newToy)
