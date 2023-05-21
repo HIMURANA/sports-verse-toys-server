@@ -104,9 +104,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Sports Verse server is running...");
+  res.send("Zoo Zest server is running...");
 });
 
 app.listen(port, () => {
-  console.log(`SportVerse server is running on port:${port}`);
+  console.log(`Zoo Zest server is running on port:${port}`);
 });
