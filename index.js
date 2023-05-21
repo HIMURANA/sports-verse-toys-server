@@ -63,11 +63,16 @@ async function run() {
       res.send(result)
     })
 
-
-
     app.post('/toys', async(req, res)=>{
       const newToy = req.body
       const result = await toyCollection.insertOne(newToy)
+      res.send(result)
+    })
+
+    app.delete('/toys/:id', async(req, res)=>{
+      const id = req.params.id
+      const query ={_id: new ObjectId(id)}
+      const result = await toyCollection.deleteOne(query)
       res.send(result)
     })
     // Send a ping to confirm a successful connection
